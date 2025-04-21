@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Product - Synapse Seller Panel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: rgba(192, 132, 252, 0.6); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(192, 132, 252, 0.8); }
+
+    /* Keep original floating label styles, adjusted slightly for dark theme */
+    .floating-input input:focus ~ label,
+    .floating-input input:not(:placeholder-shown) ~ label,
+    .floating-input textarea:focus ~ label,
+    .floating-input textarea:not(:placeholder-shown) ~ label {
+      transform: translateY(-1.1rem) translateX(-0.25rem) scale(0.85); /* Adjusted transform */
+      font-size: 0.75rem; /* Slightly smaller */
+      color: #a855f7; /* Use accent purple */
+    }
+    .floating-input label {
+      pointer-events: none;
+      position: absolute;
+      left: 1rem;
+      top: 0.75rem; /* Adjusted top for py-3 */
+      transition: all 0.2s ease-out;
+      background-color: #1a1a3a; /* Match secondary-bg */
+      padding: 0 0.25rem;
+      color: #a0a0b0; /* Use medium-text */
+      font-size: 0.875rem; /* Smaller base size */
+    }
+    /* Adjust label position for file inputs */
+     .floating-input input[type="file"] ~ label {
+        transform: translateY(-1.1rem) translateX(-0.25rem) scale(0.85);
+        font-size: 0.75rem;
+        color: #a855f7;
+     }
+  </style>
+  <script>
+    // Tailwind Customizations from seller_dashboard.html
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary-bg': '#0a0a1e', 'secondary-bg': '#1a1a3a', 'glass-bg': 'rgba(26, 26, 58, 0.6)',
+            'border-color': 'rgba(192, 132, 252, 0.2)', 'accent-purple': '#a855f7', 'accent-cyan': '#22d3ee',
+            'light-text': '#e0e0e0', 'medium-text': '#a0a0b0', 'dark-text': '#1f2937',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gradient-to-br from-primary-bg via-black to-primary-bg text-light-text min-h-screen flex antialiased">
+
+  <!-- Sidebar (Copied from seller_dashboard.html) -->
+  <aside class="w-72 bg-secondary-bg/80 backdrop-blur-lg border-r border-border-color p-6 flex flex-col shadow-2xl fixed top-0 left-0 h-full z-10">
+    <!-- Logo/Title Area -->
+    <div class="flex items-center gap-3 mb-10">
+       <span class="text-3xl">⚡</span>
+       <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent-purple to-accent-cyan">
+         Seller Panel
+       </h2>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-grow">
+      <ul class="space-y-3">
+        <!-- Dashboard -->
+        <li>
+          <a href="{{ url_for('seller_dashboard') }}"
+             class="group flex items-center p-3 rounded-lg text-medium-text transition-all duration-200 ease-out hover:bg-white/5 hover:text-white hover:pl-4">
+             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-gray-400 transition-colors duration-200 group-hover:text-accent-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        <!-- Active View Products (Adjusted active state) -->
+        <li>
+          <a href="{{ url_for('seller_list_products') }}"
+             class="group flex items-center p-3 rounded-lg bg-gradient-to-r from-accent-purple/20 to-transparent border-l-4 border-accent-purple text-white font-semibold shadow-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-accent-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            View Products
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('seller_view_orders') }}"
+             class="group flex items-center p-3 rounded-lg text-medium-text transition-all duration-200 ease-out hover:bg-white/5 hover:text-white hover:pl-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-gray-400 transition-colors duration-200 group-hover:text-accent-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002-2h2a2 2 0 002 2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+            View Orders
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('seller_add_product') }}"
+             class="group flex items-center p-3 rounded-lg text-medium-text transition-all duration-200 ease-out hover:bg-white/5 hover:text-white hover:pl-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-gray-400 transition-colors duration-200 group-hover:text-accent-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Add Product
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Logout Button -->
+    <div class="mt-auto pt-4 border-t border-border-color">
+        <a href="{{ url_for('logout') }}"
+           class="group flex items-center p-3 rounded-lg text-red-400 transition-all duration-200 ease-out hover:bg-red-500/10 hover:text-red-300 hover:pl-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-red-500 transition-colors duration-200 group-hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Logout
+        </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 ml-72 p-12 overflow-y-auto flex flex-col items-center">
+    <h1 class="text-3xl font-semibold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-accent-purple to-accent-cyan">
+        Edit Product
+    </h1>
+
+    <!-- Form Container with dashboard styling -->
+    <div class="w-full max-w-3xl bg-glass-bg backdrop-blur-md border border-border-color rounded-xl p-8 md:p-10 shadow-xl">
+      <form method="POST" enctype="multipart/form-data" class="space-y-8 relative">
+
+        <!-- Product Name -->
+        <div class="relative floating-input">
+          <input type="text" id="name" name="name" value="{{ product.name }}" required
+                 class="w-full bg-secondary-bg border border-border-color text-light-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple focus:border-transparent transition placeholder-transparent" placeholder=" " />
+          <label for="name">Product Name</label>
+        </div>
+
+        <!-- Description -->
+        <div class="relative floating-input">
+          <textarea id="description" name="description" rows="5"
+                    class="w-full bg-secondary-bg border border-border-color text-light-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple focus:border-transparent transition placeholder-transparent" placeholder=" ">{{ product.description }}</textarea>
+          <label for="description">Description</label>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="relative floating-input">
+          <input type="file" id="image_file" name="image_file" accept="image/*"
+                 class="w-full bg-secondary-bg border border-border-color text-medium-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-accent-purple/20 file:text-accent-purple hover:file:bg-accent-purple/30" />
+          <label for="image_file">Upload New Image <span class="text-xs text-medium-text/70">(leave empty to keep current)</span></label>
+        </div>
+
+        <!-- Video Upload -->
+        <div class="relative floating-input">
+          <input type="file" id="video_file" name="video_file" accept="video/*"
+                 class="w-full bg-secondary-bg border border-border-color text-medium-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple focus:border-transparent transition file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-accent-cyan/20 file:text-accent-cyan hover:file:bg-accent-cyan/30" />
+          <label for="video_file">Upload New Video <span class="text-xs text-medium-text/70">(leave empty to keep current)</span></label>
+        </div>
+
+        <!-- Price -->
+        <div class="relative floating-input">
+          <input type="number" id="price" step="0.01" name="price" value="{{ product.price }}" required
+                 class="w-full bg-secondary-bg border border-border-color text-light-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple focus:border-transparent transition placeholder-transparent [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" placeholder=" " />
+          <label for="price">Price ($)</label>
+        </div>
+
+        <!-- Category -->
+        <div>
+            <label for="category" class="block text-sm font-medium text-medium-text mb-2">Category</label>
+            <select id="category" name="category" required
+                    class="w-full bg-secondary-bg border border-border-color text-light-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple focus:border-transparent transition appearance-none bg-no-repeat bg-right pr-8"
+                    style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3E%3Cpath stroke=\'%23a0a0b0\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3E%3C/svg%3E'); background-position: right 1rem center; background-size: 1.2em 1.2em;">
+                <option value="" disabled class="bg-primary-bg text-medium-text">Select a category</option>
+                {% for category in categories %}
+                <option value="{{ category.id }}" {% if product and product.category_id == category.id %}selected{% endif %} class="bg-primary-bg text-light-text">
+                    {{ category.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <button type="submit"
+                  class="w-full bg-gradient-to-r from-accent-purple to-accent-cyan text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl hover:from-accent-purple/90 hover:to-accent-cyan/90 transition transform hover:-translate-y-0.5 duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-secondary-bg focus:ring-accent-cyan">
+            Update Product
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>

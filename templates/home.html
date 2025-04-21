@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Dropship Delight - Scale Your E-commerce Business</title> <!-- Professional Title -->
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- Professional Color Palette & Variables --- */
+    :root {
+      --primary: #4A148C; /* Deep Purple */
+      --primary-light: #7C4DFF; /* Lighter accent purple/blue */
+      --secondary: #F3E5F5; /* Very Light Purple/Off-white for backgrounds */
+      --text-dark: #212529; /* Bootstrap default dark */
+      --text-light: #f8f9fa; /* Bootstrap default light */
+      --text-muted: #6c757d; /* Bootstrap default muted */
+      --bg-dark: #16181c; /* Dark background */
+      --bg-light-dark: #212529; /* Slightly lighter dark for cards */
+      --border-color: rgba(255, 255, 255, 0.1);
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --gradient-start: rgba(0, 0, 0, 0.6);
+      --gradient-end: rgba(0, 0, 0, 0.9);
+    }
+
+    /* --- Base Styles --- */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.7;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--primary-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #a581ff; /* Slightly lighter on hover */
+    }
+
+    /* --- Helper Classes --- */
+    .section-padding {
+      padding: 80px 0;
+    }
+    .section-bg-light {
+      background-color: var(--bg-light-dark);
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .section-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 4rem;
+    }
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* --- Navbar --- */
+    .navbar {
+      background-color: rgba(22, 24, 28, 0.8); /* Dark, semi-transparent */
+      backdrop-filter: blur(10px);
+      padding: 0.8rem 0;
+      transition: background-color 0.3s ease;
+      border-bottom: 1px solid var(--border-color);
+    }
+    /* Optional: Solid background on scroll */
+    /* .navbar.scrolled {
+      background-color: var(--bg-dark);
+    } */
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--text-light) !important;
+    }
+    .navbar-brand img {
+      max-height: 40px; /* Adjust as needed */
+      margin-right: 0.5rem;
+    }
+    .navbar-nav .nav-link {
+      color: rgba(255, 255, 255, 0.85) !important;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      margin: 0 0.2rem;
+      transition: color 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--text-light) !important;
+    }
+    .navbar-toggler {
+      border-color: var(--border-color);
+    }
+    .navbar-toggler-icon {
+       background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .navbar .btn {
+        font-weight: 600;
+        padding: 0.5rem 1.2rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+    .navbar .btn-outline-light {
+        border-color: rgba(255, 255, 255, 0.5);
+        color: rgba(255, 255, 255, 0.85);
+    }
+    .navbar .btn-outline-light:hover {
+        border-color: var(--text-light);
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-light);
+    }
+    .navbar .btn-primary {
+        background-color: var(--primary-light);
+        border-color: var(--primary-light);
+        color: var(--text-light);
+    }
+    .navbar .btn-primary:hover {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(var(--primary-light), 0.3);
+    }
+
+
+    /* --- Hero Section --- */
+    .hero {
+      position: relative;
+      height: 100vh; /* Full viewport height */
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--text-light);
+      background: linear-gradient(var(--gradient-start), var(--gradient-end)), url("{{ url_for('static', filename='images/hero4.jpg') }}") no-repeat center center/cover; /* Replace with a professional bg image */
+      overflow: hidden;
+    }
+    .hero-content {
+      max-width: 800px;
+      position: relative; /* Ensure content is above pseudo-elements */
+      z-index: 2;
+      animation: heroFadeInUp 1s ease-out forwards;
+    }
+    @keyframes heroFadeInUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    .hero p.lead {
+      font-size: clamp(1.1rem, 3vw, 1.3rem);
+      margin-bottom: 2.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero .btn {
+      font-size: clamp(1rem, 2.5vw, 1.1rem);
+      padding: 0.8rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .hero .btn-primary {
+      background-color: var(--primary-light);
+      border-color: var(--primary-light);
+      color: var(--text-light);
+    }
+    .hero .btn-primary:hover {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 20px rgba(var(--primary-light), 0.4);
+    }
+    .hero .btn-outline-light {
+      border-width: 2px;
+    }
+     .hero .btn-outline-light:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .hero .cta-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+    }
+    /* Optional: Subtle animated background elements */
+    /* Add ::before or ::after with shapes/gradients if desired */
+
+    /* --- Value Proposition / Features Section --- */
+    .feature-card {
+      background-color: var(--bg-light-dark);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%; /* Make cards in a row equal height */
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    .feature-icon {
+      font-size: 3rem;
+      color: var(--primary-light);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      background-color: rgba(var(--primary-light), 0.1);
+      padding: 1rem;
+      border-radius: 50%;
+      line-height: 1;
+    }
+    .feature-card h4 {
+      font-size: 1.25rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-light);
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* --- How It Works Section --- */
+    .how-it-works-step {
+      position: relative;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .step-icon-wrapper {
+      position: relative;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+    .step-icon {
+      font-size: 2.5rem;
+      color: var(--primary);
+      background-color: var(--secondary);
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+      border: 3px solid var(--bg-light-dark); /* Match section background */
+    }
+    .step-number {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      background-color: var(--primary-light);
+      color: var(--text-light);
+      font-weight: 700;
+      font-size: 0.8rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    .how-it-works-step h5 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+    .how-it-works-step p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    /* Connecting Lines (Optional) */
+    .how-it-works-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 35px; /* Adjust vertically */
+      left: 50%;
+      width: 100%; /* Extend across column gap */
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
+      transform: translateX(50%);
+      z-index: 1;
+    }
+     @media (max-width: 767.98px) {
+      .how-it-works-step:not(:last-child)::after {
+         /* Vertical line for mobile */
+         top: 70px; left: 50%; width: 2px; height: 80%;
+         background: linear-gradient(to bottom, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
+         transform: translateX(-50%) translateY(0%); /* Reset horizontal */
+      }
+    }
+
+    /* --- Niche/Category Highlights --- */
+    .category-card {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+        height: 250px; /* Adjust height as needed */
+    }
+    .category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .category-card:hover img {
+        transform: scale(1.1);
+        filter: brightness(0.9);
+    }
+    .category-card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        padding: 1.5rem 1rem 1rem;
+        text-align: center;
+        transition: background 0.3s ease;
+    }
+     .category-card h5 {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0;
+        transition: color 0.3s ease;
+    }
+    .category-card:hover h5 {
+        color: var(--primary-light);
+    }
+
+    /* --- Testimonials Section --- */
+    .testimonial-card {
+      background-color: var(--bg-light-dark);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid var(--border-color);
+      height: 100%;
+    }
+    .testimonial-card blockquote {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+      position: relative;
+      padding-left: 2rem;
+    }
+     .testimonial-card blockquote::before {
+      content: "\201C"; /* Left double quotation mark */
+      font-family: Georgia, serif;
+      font-size: 3rem;
+      color: var(--primary-light);
+      position: absolute;
+      left: -0.5rem;
+      top: -0.5rem;
+      opacity: 0.5;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 1rem;
+      object-fit: cover;
+    }
+    .testimonial-author h6 {
+      margin-bottom: 0.1rem;
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+    .testimonial-author span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .star-rating .bi-star-fill {
+      color: #ffc107; /* Yellow for stars */
+      font-size: 0.9rem;
+      margin-right: 0.1rem;
+    }
+
+    /* --- Trusted By / Logos Section --- */
+    .trusted-by {
+        filter: grayscale(100%) opacity(0.6);
+        transition: filter 0.3s ease, opacity 0.3s ease;
+    }
+    .trusted-by:hover {
+        filter: grayscale(0%) opacity(1);
+    }
+    .trusted-by img {
+        max-height: 40px; /* Adjust logo height */
+        width: auto;
+        margin: 0 1.5rem; /* Spacing between logos */
+    }
+
+    /* --- Call to Action Section --- */
+    .cta-section {
+      background: linear-gradient(45deg, var(--primary), var(--primary-light));
+      border-radius: 15px; /* Rounded corners for the section itself */
+      padding: 4rem 2rem;
+      color: var(--text-light);
+    }
+    .cta-section h2 {
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    .cta-section .btn {
+      font-size: 1.1rem;
+      padding: 0.8rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      background-color: var(--text-light);
+      color: var(--primary);
+      transition: all 0.3s ease;
+    }
+     .cta-section .btn:hover {
+        background-color: var(--secondary);
+        color: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+     }
+
+    /* --- Footer --- */
+    .footer {
+      background-color: var(--bg-light-dark);
+      padding: 50px 0 30px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .footer .footer-brand {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer .footer-brand img {
+      max-height: 35px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    .footer h6 {
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .footer ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .footer ul li {
+      margin-bottom: 0.5rem;
+    }
+    .footer ul li a {
+      color: var(--text-muted);
+    }
+    .footer ul li a:hover {
+      color: var(--primary-light);
+    }
+    .footer .social-icons a {
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      margin-right: 1rem;
+      transition: color 0.3s ease;
+    }
+    .footer .social-icons a:hover {
+      color: var(--primary-light);
+    }
+    .footer .copyright {
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 991.98px) {
+      .navbar .btn { margin-top: 0.5rem; }
+      .hero { height: auto; min-height: 80vh; padding: 100px 0; }
+      .section-padding { padding: 60px 0; }
+      .footer { text-align: center; }
+      .footer .col-lg-2, .footer .col-lg-3 { margin-bottom: 2rem; }
+      .footer ul { display: inline-block; text-align: left; }
+    }
+     @media (max-width: 767.98px) {
+        .navbar .btn-outline-light { margin-left: 0 !important; } /* Stack buttons */
+     }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <!-- <img src="{{ url_for('static', filename='images/logo-light.png') }}" alt="YourBrand Logo"> -->
+          Dropship Delight<!-- Placeholder text -->
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+              aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> <!-- Centered Nav Links -->
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Features</a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="#how-it-works">How It Works</a>
+          </li>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a> <!-- Added Contact Link -->
+          </li>
+        </ul>
+        <!-- Right Aligned Buttons -->
+        <div class="d-flex align-items-center">
+           <a href="{{ url_for('login') if url_for else '/login' }}" class="btn btn-outline-light me-2">Login</a>
+           <a href="{{ url_for('register') if url_for else '/register' }}" class="btn btn-primary">Sign Up Free</a>
+           <!-- Removed Chatbot link, can be added back if needed -->
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="container hero-content">
+      <h1 class="fade-in-up">Build & Scale Your Dropshipping Empire</h1>
+      <p class="lead fade-in-up" style="transition-delay: 0.2s;">
+        The ultimate platform designed for ambitious entrepreneurs. Source products, automate fulfillment, and grow your online store effortlessly.
+      </p>
+      <div class="cta-buttons fade-in-up" style="transition-delay: 0.4s;">
+        <a href="{{ url_for('register') if url_for else '/register' }}" class="btn btn-primary">Start Selling Today</a>
+        <a href="#features" class="btn btn-outline-light">Explore Features <i class="bi bi-arrow-right-short ms-1"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Value Proposition / Features Section -->
+  <section id="features" class="section-padding section-bg-light">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title fade-in-up">Everything You Need to Succeed</h2>
+        <p class="section-subtitle fade-in-up" style="transition-delay: 0.1s;">
+          Our platform is packed with powerful features to streamline your dropshipping operations from start to finish.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="feature-card fade-in-up w-100" style="transition-delay: 0.2s;">
+            <div class="feature-icon"><i class="bi bi-search"></i></div>
+            <h4>Vast Product Catalog</h4>
+            <p>Access millions of high-quality products from reliable suppliers across diverse niches.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="feature-card fade-in-up w-100" style="transition-delay: 0.3s;">
+            <div class="feature-icon"><i class="bi bi-plug-fill"></i></div>
+            <h4>Seamless Store Integration</h4>
+            <p>Connect effortlessly with Shopify, WooCommerce, and other major e-commerce platforms in minutes.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="feature-card fade-in-up w-100" style="transition-delay: 0.4s;">
+            <div class="feature-icon"><i class="bi bi-truck"></i></div>
+            <h4>Automated Order Fulfillment</h4>
+            <p>Orders are automatically processed and shipped directly to your customers, saving you time.</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="feature-card fade-in-up w-100" style="transition-delay: 0.5s;">
+            <div class="feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
+            <h4>Real-time Analytics</h4>
+            <p>Track your sales, profits, and performance with insightful dashboards and reports.</p>
+          </div>
+        </div>
+         <div class="col-lg-4 col-md-6 d-flex">
+          <div class="feature-card fade-in-up w-100" style="transition-delay: 0.6s;">
+            <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+            <h4>Reliable Suppliers</h4>
+            <p>Work with vetted suppliers committed to quality products and efficient shipping.</p>
+          </div>
+        </div>
+         <div class="col-lg-4 col-md-6 d-flex">
+          <div class="feature-card fade-in-up w-100" style="transition-delay: 0.7s;">
+            <div class="feature-icon"><i class="bi bi-headset"></i></div>
+            <h4>Dedicated Support</h4>
+            <p>Get help when you need it with our responsive customer support team.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="how-it-works" class="section-padding">
+     <div class="container">
+        <div class="text-center">
+            <h2 class="section-title fade-in-up">Get Started in 4 Simple Steps</h2>
+            <p class="section-subtitle fade-in-up" style="transition-delay: 0.1s;">
+                Launch your dropshipping business faster than ever before. Here's how easy it is.
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-3 col-md-6">
+                <div class="how-it-works-step fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="step-icon-wrapper">
+                        <span class="step-number">1</span>
+                        <div class="step-icon"><i class="bi bi-shop-window"></i></div>
+                    </div>
+                    <h5>Connect Your Store</h5>
+                    <p>Link your existing online store or create a new one with our integrations.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="how-it-works-step fade-in-up" style="transition-delay: 0.3s;">
+                     <div class="step-icon-wrapper">
+                        <span class="step-number">2</span>
+                        <div class="step-icon"><i class="bi bi-box-seam"></i></div>
+                    </div>
+                    <h5>Find Products</h5>
+                    <p>Browse our extensive catalog and easily import products to your store.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="how-it-works-step fade-in-up" style="transition-delay: 0.4s;">
+                     <div class="step-icon-wrapper">
+                        <span class="step-number">3</span>
+                        <div class="step-icon"><i class="bi bi-megaphone"></i></div>
+                    </div>
+                    <h5>Market & Sell</h5>
+                    <p>Promote your products. When you make a sale, the order comes to us.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                 <div class="how-it-works-step fade-in-up" style="transition-delay: 0.5s;">
+                     <div class="step-icon-wrapper">
+                        <span class="step-number">4</span>
+                        <div class="step-icon"><i class="bi bi-send-check"></i></div>
+                    </div>
+                    <h5>We Ship For You</h5>
+                    <p>Our suppliers ship directly to your customer under your brand.</p>
+                </div>
+            </div>
+        </div>
+     </div>
+  </section>
+
+   <!-- Category Highlights Section -->
+  <section class="section-padding section-bg-light">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title fade-in-up">Explore Profitable Niches</h2>
+        <p class="section-subtitle fade-in-up" style="transition-delay: 0.1s;">
+          Discover trending products across a wide variety of categories to kickstart your sales.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="category-card fade-in-up" style="transition-delay: 0.2s;">
+            <img src="{{ url_for('static', filename='images/gadgets.jpg') }}" alt="Electronics"> <!-- Replace with actual image -->
+            <div class="category-card-overlay"><h5>Electronics & Gadgets</h5></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="category-card fade-in-up" style="transition-delay: 0.3s;">
+            <img src="{{ url_for('static', filename='images/fashion.jpg') }}" alt="Fashion"> <!-- Replace with actual image -->
+             <div class="category-card-overlay"><h5>Fashion & Apparel</h5></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="category-card fade-in-up" style="transition-delay: 0.4s;">
+            <img src="{{ url_for('static', filename='images/homee.jpg') }}" alt="Home Goods"> <!-- Replace with actual image -->
+            <div class="category-card-overlay"><h5>Home & Garden</h5></div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="category-card fade-in-up" style="transition-delay: 0.5s;">
+            <img src="{{ url_for('static', filename='images/health.jpg') }}" alt="Beauty"> <!-- Replace with actual image -->
+            <div class="category-card-overlay"><h5>Health & Beauty</h5></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section-padding">
+    <div class="container">
+      <div class="text-center">
+        <h2 class="section-title fade-in-up">Trusted by Entrepreneurs Worldwide</h2>
+        <p class="section-subtitle fade-in-up" style="transition-delay: 0.1s;">
+          Hear what successful dropshippers are saying about their experience with our platform.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="testimonial-card fade-in-up w-100" style="transition-delay: 0.2s;">
+            <div class="star-rating mb-3">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <blockquote>"Game changer! Automation saved me hours daily, letting me focus on marketing. My sales have doubled since switching."</blockquote>
+            <div class="testimonial-author">
+              <div>
+                <h6>Alex Chen</h6>
+                <span>Shopify Store Owner</span>
+              </div>
+            </div>
+          </div>
+        </div>
+         <div class="col-lg-4 col-md-6 d-flex">
+          <div class="testimonial-card fade-in-up w-100" style="transition-delay: 0.3s;">
+             <div class="star-rating mb-3">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <blockquote>"The product variety and supplier reliability are top-notch. Finding winning products is so much easier now."</blockquote>
+            <div class="testimonial-author">
+              <div>
+                <h6>Maria Garcia</h6>
+                <span>Etsy Seller</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 d-flex">
+          <div class="testimonial-card fade-in-up w-100" style="transition-delay: 0.4s;">
+             <div class="star-rating mb-3">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i> <!-- Example half star -->
+            </div>
+            <blockquote>"Excellent support team and a really intuitive platform. Highly recommend for anyone serious about dropshipping."</blockquote>
+            <div class="testimonial-author">
+              <div>
+                <h6>David Miller</h6>
+                <span>WooCommerce Expert</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       <!-- Trusted By Logos -->
+      
+    </div>
+  </section>
+
+  <!-- Pricing Section Placeholder -->
+ 
+
+  <!-- Final Call to Action Section -->
+   <section class="section-padding">
+       <div class="container">
+           <div class="cta-section text-center fade-in-up">
+                <h2>Ready to Launch Your Success Story?</h2>
+                <p>Join thousands of entrepreneurs building profitable online businesses with Dropship Delight.</p>
+                <a href="{{ url_for('register') if url_for else '/register' }}" class="btn">Get Started for Free <i class="bi bi-rocket-takeoff-fill ms-2"></i></a>
+           </div>
+       </div>
+   </section>
+
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-12">
+           <a class="footer-brand" href="#">
+            <!-- <img src="{{ url_for('static', filename='images/logo-light.png') }}" alt="YourBrand Logo"> -->
+             Dropship Delight
+           </a>
+          <p>The all-in-one dropshipping platform built to help you succeed in the competitive world of e-commerce.</p>
+           <div class="social-icons mt-3">
+             <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+             <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+             <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+             <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+           </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+          <h6>Platform</h6>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#">Integrations</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 col-6">
+           <h6>Company</h6>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+         <div class="col-lg-2 col-md-4 col-6">
+           <h6>Resources</h6>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">API Documentation</a></li>
+            <li><a href="#">Success Stories</a></li>
+            <li><a href="#">Guides</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-12 col-6">
+           <h6>Legal</h6>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        © <span id="current-year"></span> Dropship Delight. All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Simple Fade-in Animation on Scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Optional: Unobserve after animation to improve performance
+          // observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1 // Trigger when 10% of the element is visible
+    });
+
+    document.querySelectorAll('.fade-in-up').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // Optional: Change navbar background on scroll
+    /*
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+    */
+  </script>
+
+</body>
+</html>

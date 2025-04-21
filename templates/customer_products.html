@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop – Premium Dropshipping</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> <!-- Added Open Sans -->
+
+
+  <style>
+    /* Unified Maroon & White Color Scheme */
+    :root {
+      --primary: #800000;             /* Maroon */
+      --secondary: #ffffff;           /* White */
+      --background: #f8f8f8;           /* Very light gray */
+      --text: #333333;                /* Dark text */
+      --card-shadow: rgba(0, 0, 0, 0.1); /* Softer shadow */
+      --hero-bg: url('https://via.placeholder.com/1920x600?text=Exclusive+Collection') no-repeat center center/cover;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif; /* Use Open Sans */
+      background: var(--background);
+      margin: 0;
+      padding: 0;
+      color: var(--text);
+    }
+    a { text-decoration: none; color: var(--primary); }
+    a:hover { color: #a00000; }
+
+
+    /*************************************************************
+     * 1. PROMO BANNER
+     *************************************************************/
+    .promo {
+        background: #2d0b13;
+        color: var(--secondary);
+        text-align: center;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0;
+        border: none;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        font-size: 0.9rem;
+        position: relative; /* For close button */
+    }
+    .promo .btn-close {
+      filter: invert(1) grayscale(100%) brightness(200%); /* White */
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translateY(-50%);
+      opacity: 0.7;
+    }
+     .promo .btn-close:hover { opacity: 1;}
+
+
+    /*************************************************************
+     * 2. NAVBAR (Modern, 3D & Sleek)
+     *************************************************************/
+    .navbar {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      /* Adjust top if promo bar is always visible and fixed height */
+      /* Example: top: 40px; */
+      top: 0; /* Sticks to top */
+      z-index: 1030; /* Above content, below modals */
+      background-color: rgba(0, 0, 0, 0.6); /* Darker Transparent */
+      backdrop-filter: blur(8px);
+      color: white;
+      padding-top: 0.5rem; /* Keep original vertical padding */
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      
+    }
+    .navbar-brand img {
+        height: 100px;
+        width: auto;
+        display: block;
+    }
+    .navbar-brand {
+        position: absolute;
+        left: 1rem; /* Adjust this to position logo within the new padding-left space */
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        padding: 0;
+        margin: 0;
+        line-height: 0;
+      }
+  
+
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            padding: 0.6rem 1rem;
+            font-weight: 600;
+            font-family: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
+            transition: color 0.3s, background-color 0.3s;
+            font-size: 1rem;
+             border-radius: 6px;
+             margin: 0 0.2rem;
+          }
+
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active { /* Style active link */
+      color: #fff !important;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .navbar > .container {
+        padding-left: 160px; /* Adjust this value based on your logo's width + desired spacing */
+                             /* E.g., if 100px height makes logo 150px wide, add ~160px padding */
+        position: relative; /* Needed for absolute positioning context if logo positioned relative to container */
+      }
+    .dropdown-menu {
+        background-color: rgba(30, 30, 30, 0.9); /* Dark dropdown */
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 8px;
+        margin-top: 0.5rem;
+        box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    .dropdown-item {
+        color: rgba(255, 255, 255, 0.85);
+        padding: 0.5rem 1.2rem;
+        font-size: 0.95rem;
+        transition: background-color 0.2s, color 0.2s;
+    }
+    .dropdown-item:hover, .dropdown-item:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: #fff;
+    }
+    .dropdown-divider { border-top-color: rgba(255, 255, 255, 0.2); }
+
+    .badge-cart {
+      position: absolute;
+      top: -5px;
+      right: -8px;
+      font-size: 0.65rem;
+      line-height: 1;
+      padding: 0.3em 0.5em;
+      font-weight: 600;
+    }
+    .navbar-toggler {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 0.25rem 0.5rem;
+    }
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+      outline: none;
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/ %3E%3C/svg%3E");
+      }
+
+      /* Sleek Search Bar */
+      .navbar form {
+        position: relative;
+      }
+      .navbar form .form-control { /* Target input within navbar form */
+        background: rgba(255,255,255,0.15);
+        color: var(--secondary);
+        border: 1px solid rgba(255,255,255,0.4);
+        border-radius: 50px;
+        padding: 0.4rem 1rem 0.4rem 2.5rem; /* Left padding for icon */
+        width: 250px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+         font-size: 0.9rem;
+      }
+      .navbar form .form-control::placeholder {
+        color: rgba(255,255,255,0.7);
+      }
+      .navbar form .form-control:focus {
+        background: rgba(255,255,255,0.25);
+        border-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+        outline: none;
+        color: #fff;
+      }
+       .navbar form .search-icon { /* Class needs to be added to the <i> tag */
+           position: absolute;
+           left: 0.9rem;
+           top: 50%;
+           transform: translateY(-50%);
+           color: rgba(255,255,255,0.7);
+           pointer-events: none;
+           font-size: 1rem;
+       }
+
+
+    /*************************************************************
+     * 3. HERO SECTION
+     *************************************************************/
+     /*************************************************************
+     * 3. HERO SECTION - CAROUSEL STYLES
+     *************************************************************/
+    .hero-carousel { /* The main carousel container */
+        height: 70vh; /* Maintain desired height */
+        min-height: 450px;
+        margin-bottom: 2rem; /* Spacing below carousel */
+        position: relative; /* Needed for absolute positioning of content */
+        overflow: hidden; /* Ensure controls/indicators stay within bounds */
+    }
+
+    .carousel-inner,
+    .carousel-item {
+        height: 100%; /* Make inner and items fill the carousel height */
+    }
+
+    .carousel-item img.carousel-img {
+        height: 100%;
+        object-fit: cover; /* Cover the area, might crop */
+        object-position: center; /* Center the image */
+        /* Add a subtle overlay directly on the image via filter or pseudo-element */
+        filter: brightness(0.7); /* Darken image slightly for text contrast */
+    }
+
+    /* Re-purpose .hero-content for carousel caption overlay */
+    .carousel-caption.hero-content {
+        /* Override default Bootstrap caption positioning */
+        position: absolute;
+        right: auto; /* Reset bootstrap defaults */
+        bottom: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%); /* Center the content block */
+        text-align: center;
+        padding: 1rem; /* Add padding */
+        width: 90%; /* Limit width */
+        max-width: 700px; /* Max width from original */
+        z-index: 10; /* Ensure it's above the image */
+        color: var(--secondary); /* Ensure text is white */
+        background: rgba(0, 0, 0, 0.3); /* Optional: Slight dark bg for better readability */
+        border-radius: 8px; /* Optional: Rounded corners for the caption background */
+    }
+
+     /* Ensure original h1, p, btn styles apply */
+    .carousel-caption.hero-content h1 {
+        font-size: clamp(2.5rem, 5vw, 3.8rem);
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif;
+        margin-bottom: 1rem;
+        text-shadow: 0 3px 7px rgba(0,0,0,0.5); /* Slightly stronger shadow */
+        color: inherit; /* Inherit from parent */
+    }
+
+    .carousel-caption.hero-content p {
+        font-size: clamp(1.1rem, 3vw, 1.3rem);
+        margin-bottom: 1.8rem;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        opacity: 0.9;
+        color: inherit; /* Inherit from parent */
+    }
+
+    .carousel-caption.hero-content .btn {
+        /* Styles should be inherited, but specify if needed */
+        padding: 0.8rem 2.2rem;
+        font-size: 1.05rem;
+        font-weight: 600;
+        border-radius: 50px;
+        background: var(--primary);
+        border: 1px solid var(--primary);
+        color: var(--secondary);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .carousel-caption.hero-content .btn:hover {
+        background: #a00000;
+        border-color: #a00000;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    /* Style Carousel Controls and Indicators (Optional Enhancement) */
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%; /* Make arrows less wide */
+        opacity: 0.6;
+        transition: opacity 0.2s ease;
+    }
+    .carousel-control-prev:hover,
+    .carousel-control-next:hover {
+        opacity: 0.9;
+    }
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        border: none;
+        margin: 0 5px; /* Space out indicators */
+    }
+    .carousel-indicators .active {
+        background-color: var(--secondary); /* White active indicator */
+    }
+
+    /* Adjust caption positioning on smaller screens if needed */
+    @media (max-width: 767px) {
+        .carousel-caption.hero-content {
+             width: 85%;
+             padding: 0.5rem;
+             background: rgba(0, 0, 0, 0.4); /* Slightly darker bg on mobile */
+        }
+         .carousel-caption.hero-content h1 { font-size: clamp(1.8rem, 6vw, 2.5rem); margin-bottom: 0.5rem;}
+         .carousel-caption.hero-content p { font-size: clamp(0.9rem, 3vw, 1.1rem); margin-bottom: 1rem;}
+         .carousel-caption.hero-content .btn { padding: 0.6rem 1.5rem; font-size: 0.9rem;}
+
+         .hero-carousel { height: 60vh; min-height: 350px;} /* Adjust height for mobile */
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      color: var(--secondary);
+      z-index: 2;
+      padding: 1rem;
+      max-width: 700px;
+    }
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem); /* Responsive */
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif; /* Poppins for heading */
+      margin-bottom: 1rem;
+      text-shadow: 0 3px 7px rgba(0,0,0,0.4);
+    }
+    .hero-content p {
+      font-size: clamp(1.1rem, 3vw, 1.3rem); /* Responsive */
+      margin-bottom: 1.8rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      opacity: 0.9;
+    }
+    .hero-content .btn {
+      padding: 0.8rem 2.2rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 50px;
+      background: var(--primary); /* Use variable */
+      border: 1px solid var(--primary);
+      color: var(--secondary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .hero-content .btn:hover {
+      background: #a00000; /* Darker maroon */
+      border-color: #a00000;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    /*************************************************************
+     * 4. SIDEBAR FILTERS (Modern, 3D & Sleek)
+     *************************************************************/
+    /* CHANGE: Enhanced filter styles */
+    .filters {
+      background: #fdfdff; /* Slightly off-white bg */
+      border: 1px solid #e8e8f0; /* Softer border */
+      border-radius: 12px; /* More rounding */
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06); /* Softer, larger shadow */
+      margin-bottom: 1.5rem;
+      padding: 1.5rem; /* Increased padding */
+      position: sticky; /* Make it sticky on desktop */
+      top: 90px; /* Adjust based on navbar height + desired space */
+      z-index: 100; /* Ensure it's above grid but below navbar */
+      margin-top:50px;
+    }
+    .filters h5 {
+      color: var(--primary);
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif; /* Consistent font */
+      margin-bottom: 1rem; /* Space below title */
+      padding-bottom: 0.75rem; /* Space below underline */
+      border-bottom: 2px solid var(--primary); /* Primary color underline */
+      display: inline-block; /* Fit underline to text */
+    }
+     /* Resetting top margin for the first h5 */
+    .filters > h5:first-of-type {
+        margin-top: 0;
+    }
+    .filters .form-check {
+        margin-bottom: 0.75rem; /* More space between items */
+        padding-left: 2em; /* Ensure space for custom check */
+    }
+    .filters .form-check-label {
+      color: #495057; /* Standard Bootstrap gray */
+      font-size: 0.9rem;
+      cursor: pointer; /* Indicate clickable */
+    }
+    .filters .form-check-input {
+        cursor: pointer;
+        margin-top: 0.2em; /* Align checkbox better */
+    }
+    .filters .form-check-input:checked {
+        background-color: var(--primary);
+        border-color: var(--primary);
+    }
+     /* Style the range slider track and thumb */
+    .filters .form-range {
+      accent-color: var(--primary); /* Sets thumb color */
+      cursor: pointer;
+      padding-left: 0; /* Override default padding */
+      padding-right: 0;
+    }
+    /* Optional: style track if needed */
+    /* .filters .form-range::-webkit-slider-runnable-track { ... } */
+    /* .filters .form-range::-moz-range-track { ... } */
+
+     /* Price range label and value */
+    .filters .price-label {
+        font-size: 0.85rem;
+        color: #6c757d; /* Muted text */
+        margin-bottom: 0.25rem;
+        display: block; /* Ensure it's on its own line */
+    }
+    .filters #priceValue {
+        font-weight: 600;
+        color: var(--text);
+    }
+    .filters .price-display { /* Wrapper for label and value */
+        margin-bottom: 0.5rem; /* Space below value, before slider */
+    }
+
+    .filters hr {
+      margin: 1.8rem 0; /* More space around hr */
+      border-top: 1px solid #e5e5e5;
+    }
+     /* Clear filters button */
+    .filters .btn-clear-filters {
+        font-size: 0.85rem;
+        font-weight: 500;
+        border-radius: 50px; /* Pill shape */
+        padding: 0.5rem 1rem;
+        width: 100%;
+        border-width: 1px; /* Ensure border visible */
+        display: inline-flex; /* Align icon */
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        color: #6c757d; /* Secondary text color */
+        border-color: #ced4da; /* Standard border */
+        background-color: transparent;
+        transition: all 0.2s ease-in-out;
+    }
+    .filters .btn-clear-filters:hover {
+        background-color: #f8f9fa; /* Light gray bg */
+        color: var(--primary); /* Maroon text on hover */
+        border-color: var(--primary); /* Maroon border on hover */
+    }
+
+
+    /*************************************************************
+     * 5. PRODUCT GRID & CARDS
+     *************************************************************/
+    .product-grid {
+      /* Use grid for better alignment */
+      display: grid;
+      /* Responsive columns */
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Adjust min width */
+      gap: 1.5rem; /* Adjust gap */
+    }
+    .product-card {
+      background: var(--secondary);
+      border-radius: 8px; /* Consistent rounding */
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Default shadow */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #eee; /* Subtle border */
+       /* Remove fixed height/width, let grid manage */
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12); /* Enhanced hover shadow */
+    }
+    .card-img-wrapper {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      padding-top: 100%; /* Aspect ratio 1:1 - Adjust if images differ */
+      background-color: #f0f0f0; /* Placeholder bg */
+    }
+    .product-card img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; /* Cover the area */
+      transition: transform 0.35s ease; /* Smoother zoom */
+    }
+    .product-card:hover img {
+      transform: scale(1.07); /* Zoom effect */
+    }
+    .video-icon {
+      position: absolute;
+      top: 10px; right: 10px; /* Top right */
+      transform: none;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 5px 8px;
+      border-radius: 5px;
+      color: var(--secondary);
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease, background-color 0.2s ease;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .product-card:hover .video-icon { opacity: 1; }
+    .video-icon:hover { background: rgba(0, 0, 0, 0.8); }
+
+    .card-body {
+      flex-grow: 1; /* Allow body to fill space */
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 1.1rem; /* Adjusted padding */
+      text-align: left; /* Align text left for titles */
+    }
+    .card-title {
+      font-size: 1rem; /* Standard title size */
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      font-family: 'Poppins', sans-serif; /* Poppins for titles */
+      /* Clamp text to 2 lines */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-height: 2.8em; /* Reserve space */
+    }
+    .card-title a { /* Style link within title */
+        color: inherit;
+        text-decoration: none;
+    }
+     .card-title a:hover { color: var(--primary); }
+     /* Stretched link for title (optional) */
+     .card-title a.stretched-link::after {
+         position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+         z-index: 1; content: "";
+     }
+
+    .price {
+      font-size: 1.15rem;
+      font-weight: 700; /* Bolder price */
+      color: var(--primary);
+      margin-bottom: 1rem; /* Space before buttons */
+      margin-top: auto; /* Push price/buttons down */
+    }
+     /* Wrapper for buttons */
+    .product-buttons {
+        display: flex;
+        gap: 0.5rem; /* Space between buttons */
+         /* Ensure buttons are clickable over stretched link */
+         position: relative;
+         z-index: 3;
+    }
+    /* CHANGE: Shared button styles (adjusting for icon button) */
+    .btn-add, .btn-wishlist {
+        flex: 0 1 auto; /* Don't grow, shrink if needed, base on content */
+        width: 40px; /* Fixed width for square-ish button */
+        height: 40px; /* Fixed height */
+        border-radius: 50%; /* Make buttons circular */
+        font-size: 1rem; /* Icon size adjustment */
+        padding: 0; /* Remove padding, rely on flex centering */
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+        border: 1px solid;
+        display: inline-flex; /* Use flex to center icon */
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* CHANGE: Add to cart button specific style (Icon only) */
+    .btn-add {
+      background: #2d0b13;
+      border-color: #2d0b13;
+      color: #fff;
+    }
+    .btn-add:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+       transform: scale(1.1); /* Pop effect */
+    }
+
+    /* CHANGE: Wishlist button style (Icon only) */
+    .btn-wishlist {
+      background: transparent;
+      border-color: #ccc;
+      color: #666;
+    }
+     .btn-wishlist:hover {
+        background-color: #f8d7da; /* Light pink */
+        border-color: var(--primary); /* Maroon border */
+        color: var(--primary); /* Maroon icon */
+        transform: scale(1.1); /* Pop effect */
+     }
+
+
+    /*************************************************************
+     * 6. PAGINATION
+     *************************************************************/
+    .pagination {
+      justify-content: center;
+      margin: 2.5rem 0 1rem 0; /* Adjust margins */
+    }
+    .pagination .page-link {
+        color: var(--primary);
+        border-radius: 50%; /* Circle */
+        margin: 0 0.3rem;
+        border: 1px solid #ddd;
+        min-width: 40px; height: 40px; /* Consistent size */
+        display: flex; justify-content: center; align-items: center; /* Center number */
+        font-weight: 600;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .pagination .page-link:hover {
+        background-color: #ffeeee; /* Light maroon bg */
+        color: #600000; /* Darker maroon text */
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .pagination .page-item.active .page-link {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: var(--secondary);
+        box-shadow: 0 4px 10px rgba(128,0,0, 0.3);
+         transform: scale(1.05); /* Slightly larger active */
+    }
+    .pagination .page-item.disabled .page-link {
+        color: #aaa;
+        background-color: #f0f0f0;
+        border-color: #e0e0e0;
+        box-shadow: none;
+    }
+
+    /*************************************************************
+     * 7. FLOATING CHATBOT & POPUP
+     *************************************************************/
+    #chatbot-button {
+      position: fixed; bottom: 24px; right: 24px;
+      background: linear-gradient(135deg, var(--primary), #a04040);
+      color: white;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      box-shadow: 0 10px 25px rgba(128,0,0, 0.3);
+      cursor: pointer; z-index: 1050;
+      font-size: 1.8rem;
+      transition: transform 0.2s ease-in-out, background 0.3s;
+    }
+    #chatbot-button:hover {
+      background: linear-gradient(135deg, #a00000, #b05050);
+      transform: scale(1.1);
+    }
+    #chatbot-popup {
+      position: fixed; bottom: 100px; right: 24px;
+      width: 360px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+      z-index: 1050; overflow: hidden;
+      display: flex; flex-direction: column;
+      font-family: 'Segoe UI', sans-serif;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform: translateY(30px) scale(0.95);
+      opacity: 0; pointer-events: none;
+    }
+    #chatbot-popup.show {
+      opacity: 1; transform: translateY(0) scale(1); pointer-events: auto;
+    }
+    .chat-header {
+      background: linear-gradient(135deg, var(--primary), #a04040);
+      color: white; padding: 14px 18px;
+      font-weight: 600; font-size: 1rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .chat-header .btn-close-chat {
+      background: none; border: none; color: white;
+      font-size: 1.3rem; opacity: 0.8; padding: 0; line-height: 1;
+    }
+    .chat-header .btn-close-chat:hover { opacity: 1; }
+    .chat-body {
+      flex-grow: 1; padding: 16px;
+      max-height: 320px; overflow-y: auto;
+      font-size: 0.9rem; color: #333;
+      background-color: #f9f9fc;
+      scroll-behavior: smooth;
+    }
+    /* Custom scrollbar */
+    .chat-body::-webkit-scrollbar { width: 6px; }
+    .chat-body::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px;}
+    .chat-body::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px;}
+    .chat-body::-webkit-scrollbar-thumb:hover { background: #aaa; }
+    /* Chat bubble styles */
+    .chat-bubble {
+      padding: 10px 15px; border-radius: 18px; margin-bottom: 10px;
+      max-width: 85%; word-wrap: break-word; line-height: 1.4;
+    }
+    .chat-bubble.user {
+      background-color: #e1f5fe; color: #01579b;
+      margin-left: auto; border-bottom-right-radius: 6px;
+    }
+    .chat-bubble.bot {
+      background-color: #eceff1; color: #37474f;
+      margin-right: auto; border-bottom-left-radius: 6px;
+    }
+    /* Typing indicator style */
+    #typing { color: #78909c; font-style: italic; font-size: 0.85rem; }
+    #typing .dot {
+      display: inline-block; width: 5px; height: 5px;
+      background-color: #90a4ae; border-radius: 50%; margin: 0 2px;
+      animation: typingDots 1.2s infinite ease-in-out;
+    }
+    #typing .dot:nth-child(2) { animation-delay: 0.2s; }
+    #typing .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingDots { 0%, 60%, 100% { transform: scale(0.4); opacity: 0.5; } 30% { transform: scale(1); opacity: 1; } }
+    /* Chat Input Area */
+    .chat-input-area {
+      background-color: #fff; padding: 12px 15px;
+      border-top: 1px solid #e1e1e1; display: flex; align-items: center;
+    }
+    .chat-input-area input#chat-input {
+      flex-grow: 1; border-radius: 20px; border: 1px solid #ccc;
+      padding: 10px 18px; font-size: 0.95rem; margin-right: 10px;
+    }
+    .chat-input-area input#chat-input:focus {
+      border-color: var(--primary); box-shadow: 0 0 0 0.15rem rgba(128,0,0, 0.2); outline: none;
+    }
+    .chat-input-area button#send-chat {
+      border-radius: 50%; padding: 0; width: 40px; height: 40px;
+      flex-shrink: 0; background-color: var(--primary); border-color: var(--primary);
+      color: white; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    .chat-input-area button#send-chat:hover {
+      background-color: #a00000; border-color: #a00000; transform: scale(1.1);
+    }
+    .chat-input-area button#send-chat:disabled { opacity: 0.6; cursor: not-allowed; }
+
+
+    /*************************************************************
+     * 8. PAGE HEADER / SECTION TITLES
+     *************************************************************/
+    .page-header {
+        margin-bottom: 2.5rem; /* Adjusted margin */
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s 0.2s ease-out forwards; /* Added delay */
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 4vw, 2.6rem); /* Responsive */
+        font-weight: 700;
+        font-family: 'Poppins', sans-serif; /* Poppins */
+        margin-bottom: 0.6rem;
+         /* Removed margin-left */
+        color: #333;
+        transition: color 0.3s ease;
+      }
+
+      .section-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.15rem); /* Responsive */
+        font-weight: 400;
+        color: #666;
+        font-family: 'Open Sans', sans-serif; /* Open Sans */
+        transition: color 0.3s ease;
+         /* Removed margin-left */
+         max-width: 600px; /* Limit width */
+         margin-left: auto;
+         margin-right: auto; /* Center subtitle */
+      }
+
+      /* Fade-in + move up animation */
+      @keyframes fadeInUp {
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+
+    /*************************************************************
+     * Responsive Adjustments
+     *************************************************************/
+     @media (max-width: 991.98px) { /* Tablet */
+         .filters {
+             position: static; /* Disable sticky on tablet */
+             top: auto;
+             margin-bottom: 2rem; /* Add margin when not sticky */
+         }
+         .product-grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+     }
+
+     @media (max-width: 767.98px) { /* Mobile */
+         .hero { height: 60vh; }
+         .page-header { margin-bottom: 1.5rem; }
+         .section-title { font-size: 1.8rem; }
+         .section-subtitle { font-size: 1rem; }
+         .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem;} /* 2 columns mobile */
+         .card-body { padding: 0.8rem; }
+         .card-title { font-size: 0.9rem; min-height: 2.6em; }
+         .price { font-size: 1.05rem; margin-bottom: 0.8rem;}
+         .btn-add, .btn-wishlist { width: 36px; height: 36px; font-size: 0.9rem;} /* Slightly smaller icons */
+         .pagination .page-link { min-width: 36px; height: 36px; font-size: 0.9rem;}
+         #chatbot-popup { width: calc(100% - 30px); bottom: 80px; right: 15px; max-height: calc(100vh - 100px); }
+         .chat-body { max-height: calc(100vh - 200px); }
+     }
+      @media (max-width: 450px) { /* Smaller mobile */
+          .product-grid { grid-template-columns: 1fr; } /* Single column */
+      }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Promo Banner -->
+  <div class="promo alert alert-dismissible fade show mb-0" role="alert">
+    <i class="bi bi-truck me-2"></i>Free shipping on orders over $50!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <!-- Placeholder Brand -->
+      <a class="navbar-brand" href="{{ url_for('home') if url_for else '#' }}">
+        <img src="{{ url_for('static', filename='images/dropshiplogo.png') }}" class="d-block w-100 carousel-img" alt="Hero Slide 1">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('home') if url_for else '#' }}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" aria-current="page" href="#" data-bs-toggle="dropdown" aria-expanded="false">Shop</a> <!-- Example: Active Shop Link -->
+            <ul class="dropdown-menu">
+               <li><a class="dropdown-item" href="{{ url_for('customer_products') if url_for else '?'}}">All Products</a></li>
+               <li><hr class="dropdown-divider"></li>
+              {% if categories %}
+                {% for cat in categories %}
+                  <li><a class="dropdown-item" href="?category={{cat.id}}">{{cat.name}}</a></li>
+                {% endfor %}
+              {% else %}
+                 <li><a class="dropdown-item" href="#">Category A</a></li>
+                 <li><a class="dropdown-item" href="#">Category B</a></li>
+              {% endif %}
+            </ul>
+          </li>
+           <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+           <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+        <form class="d-flex me-lg-3 mb-3 mb-lg-0" method="get" action="{{ url_for('customer_products') if url_for else '#' }}" role="search">
+            <div class="position-relative">
+              <!-- CHANGE: Added search icon class -->
+              <i class="bi bi-search search-icon"></i>
+              <input class="form-control" type="search" name="search"
+                     value="{{ current_search or '' }}"
+                     placeholder="Search products…" aria-label="Search">
+            </div>
+        </form>
+        <ul class="navbar-nav flex-row"> <!-- Icons side-by-side -->
+          <li class="nav-item position-relative me-3">
+            <a class="nav-link" href="{{ url_for('cart') if url_for else '#' }}" aria-label="View Cart">
+                <i class="bi bi-cart-fill fs-5"></i>
+                {% if cart_count and cart_count > 0 %}
+                  <span class="badge bg-danger badge-cart">{{ cart_count }}</span>
+                {% endif %}
+            </a>
+          </li>
+          <li class="nav-item position-relative me-3">
+            <a class="nav-link" href="{{ url_for('wishlist') if url_for else '#' }}" aria-label="View Wishlist">
+              <i class="bi bi-heart-fill fs-5 text-danger"></i>
+              <!-- Optional Wishlist count -->
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            {% if session.username %}
+              <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="My Account">
+                <i class="bi bi-person-circle fs-5"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                 <li><a class="dropdown-item" href="{{ url_for('home') if url_for else '#'}}"><i class="bi bi-person-lines-fill me-2"></i>My Account</a></li>
+                 <li><a class="dropdown-item" href="{{ url_for('order_history') if url_for else '#'}}"><i class="bi bi-receipt me-2"></i>Orders</a></li>
+                 <li><hr class="dropdown-divider"></li>
+                 <li><a class="dropdown-item text-danger" href="{{ url_for('logout') if url_for else '#'}}"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+              </ul>
+            {% else %}
+              <a class="nav-link" href="{{ url_for('login') if url_for else '#' }}" aria-label="Login or Register">
+                <i class="bi bi-box-arrow-in-right fs-5"></i>
+              </a>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="5000"> <!-- data-bs-interval controls slide duration (5000ms = 5s) -->
+
+    <!-- Indicators (Dots) -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <!-- Inner content (Slides) -->
+    <div class="carousel-inner">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <!-- CHANGE: Replace with your image URL -->
+        <img src="{{ url_for('static', filename='images/f2.jpg') }}" class="d-block w-100 carousel-img" alt="Hero Slide 1">
+        <!-- Content Overlay -->
+        <div class="carousel-caption hero-content">
+          <h1>Discover Exclusive Finds</h1>
+          <p>Handpicked selections delivered straight to your door.</p>
+          <a href="#productList" class="btn">Shop Now</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+         <!-- CHANGE: Replace with your image URL -->
+         <img src="{{ url_for('static', filename='images/f1.webp') }}" class="d-block w-100 carousel-img" alt="Hero Slide 1">
+         <!-- Content Overlay (You can customize text per slide if needed) -->
+         <div class="carousel-caption hero-content">
+            <h1>New Arrivals Daily</h1>
+            <p>Explore the latest trends and unique products added every day.</p>
+            <a href="#productList" class="btn">Explore New</a>
+          </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <!-- CHANGE: Replace with your image URL -->
+        <img src="{{ url_for('static', filename='images/f4.jpg') }}" class="d-block w-100 carousel-img" alt="Hero Slide 1">
+         <!-- Content Overlay -->
+         <div class="carousel-caption hero-content">
+            <h1>Quality You Can Trust</h1>
+            <p>Reliable dropshipping with premium quality checks.</p>
+            <a href="#productList" class="btn">Learn More</a>
+          </div>
+      </div>
+
+    </div>
+
+    <!-- Controls (Arrows) -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </section>
+
+  <div class="container mt-4"> <!-- Added margin-top to container -->
+
+    <div class="page-header mb-4 text-center">
+        <h2 class="section-title">All Products</h2>
+        <p class="section-subtitle">Curated Finds, Delivered Fast</p>
+      </div>
+
+
+    <div class="row">
+      <!-- Sidebar Filters (Desktop) -->
+      <aside class="col-lg-3 d-none d-lg-block">
+        <form method="get" action="{{ url_for('customer_products') if url_for else '#' }}" id="filterForm">
+            <div class="filters mb-4">
+              <h5>Categories</h5>
+              {% if categories %}
+                {% for cat in categories %}
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category"
+                           id="cat{{cat.id}}" value="{{cat.id}}"
+                           {% if cat.id in current_cats %}checked{% endif %}
+                           onchange="this.form.submit()"> <!-- CHANGE: Added onchange -->
+                    <label class="form-check-label" for="cat{{cat.id}}">{{cat.name}}</label>
+                  </div>
+                {% endfor %}
+              {% else %}
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="cat1" name="category" value="1" onchange="this.form.submit()"><label class="form-check-label" for="cat1">Sample Cat 1</label></div>
+                  <div class="form-check"><input class="form-check-input" type="checkbox" id="cat2" name="category" value="2" onchange="this.form.submit()"><label class="form-check-label" for="cat2">Sample Cat 2</label></div>
+              {% endif %}
+
+              <hr>
+
+              <h5>Price Range</h5>
+              <div class="price-display mb-2">
+                  <label for="priceRange" class="price-label">Max Price:</label>
+                  $<span id="priceValue">{{ current_price or 10000 }}</span>
+              </div>
+              <input type="range" name="price_max" id="priceRange" class="form-range"
+                     min="0" max="1000" step="10"
+                     value="{{ current_price or 1000 }}"
+                     aria-labelledby="priceRangeLabel"
+                     oninput="document.getElementById('priceValue').textContent=this.value"
+                     onchange="this.form.submit()"> <!-- CHANGE: Added onchange -->
+
+              <hr>
+              <a href="{{ url_for('customer_products') if url_for else '#' }}" class="btn btn-clear-filters mt-2">
+                <i class="bi bi-arrow-clockwise"></i> Clear Filters
+              </a>
+
+                 <!-- Keep these hidden fields to preserve sort/search context -->
+                 {% if current_search %} <input type="hidden" name="search" value="{{ current_search }}"> {% endif %}
+                 {% if current_sort %} <input type="hidden" name="sort" value="{{ current_sort }}"> {% endif %}
+
+            </div> <!-- End .filters -->
+        </form>
+      </aside>
+
+      <div class="col-lg-9">
+        <!-- Mobile Filters Trigger & Desktop Sort -->
+        <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+            <button class="btn btn-sm btn-outline-secondary d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterCanvas" aria-controls="filterCanvas">
+              <i class="bi bi-funnel-fill me-1"></i> Filters & Sort
+            </button>
+             <!-- Desktop Sorting Dropdown -->
+             <div class="ms-auto"> <!-- Push to right -->
+                <form method="get" action="{{ url_for('customer_products') if url_for else '#' }}" id="sortForm" class="d-inline-block">
+                     <!-- Pass existing filters via hidden inputs -->
+                     {% for cat_id in current_cats %} <input type="hidden" name="category" value="{{cat_id}}"> {% endfor %}
+                     {% if current_price %} <input type="hidden" name="price_max" value="{{current_price}}"> {% endif %}
+                     {% if current_search %} <input type="hidden" name="search" value="{{ current_search }}"> {% endif %}
+
+                    <label for="sortSelect" class="me-1 small d-none d-lg-inline">Sort by:</label>
+                    <select name="sort" id="sortSelect" class="form-select form-select-sm d-inline-block w-auto" onchange="this.form.submit()">
+                        <option value="newest"    {% if current_sort=='newest' %}selected{% endif %}>Newest Arrivals</option>
+                        <option value="price-asc" {% if current_sort=='price-asc' %}selected{% endif %}>Price: Low to High</option>
+                        <option value="price-desc"{% if current_sort=='price-desc'%}selected{% endif %}>Price: High to Low</option>
+                        <!-- Add other sort options if needed -->
+                    </select>
+                </form>
+             </div>
+        </div>
+
+
+        <!-- Offcanvas Mobile Filters -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="filterCanvas" aria-labelledby="filterCanvasLabel">
+          <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="filterCanvasLabel"><i class="bi bi-funnel-fill me-2"></i>Filters & Sort</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+             <!-- Mobile Filter Form -->
+             <form method="get" action="{{ url_for('customer_products') if url_for else '#' }}" id="filterFormMobile">
+                <h6>Categories</h6>
+                {% if categories %}
+                    {% for cat in categories %}
+                    <div class="form-check mb-2">
+                      <input class="form-check-input" type="checkbox" name="category" id="mcat{{cat.id}}" value="{{cat.id}}" {% if cat.id in current_cats %}checked{% endif %}>
+                      <label class="form-check-label" for="mcat{{cat.id}}">{{cat.name}}</label>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="small text-muted">No categories.</p>
+                {% endif %}
+                <hr>
+                <h6>Price Range</h6>
+                 <div class="price-display mb-2">
+                     <label for="mpriceRange" class="price-label">Max Price:</label>
+                     $<span id="mpriceValue">{{ current_price or 1000 }}</span>
+                 </div>
+                <input type="range" name="price_max" id="mpriceRange" class="form-range mb-3" min="0" max="1000" step="10" value="{{ current_price or 1000 }}" oninput="document.getElementById('mpriceValue').textContent=this.value">
+                <hr>
+                 <h6>Sort By</h6>
+                 <select name="sort" id="sortSelectMobile" class="form-select form-select-sm mb-4">
+                   <option value="newest"    {% if current_sort=='newest' %}selected{% endif %}>Newest Arrivals</option>
+                   <option value="price-asc" {% if current_sort=='price-asc' %}selected{% endif %}>Price: Low to High</option>
+                   <option value="price-desc"{% if current_sort=='price-desc'%}selected{% endif %}>Price: High to Low</option>
+                 </select>
+
+                  <!-- Pass search term -->
+                  {% if current_search %} <input type="hidden" name="search" value="{{ current_search }}"> {% endif %}
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i> Apply</button>
+                    <a href="{{ url_for('customer_products', search=current_search) if url_for else '#'}}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-arrow-clockwise me-1"></i> Reset Filters</a>
+                </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productList">
+          {% if products %}
+            {% for product in products %}
+            <div class="product-card">
+              <div class="card-img-wrapper">
+                <img src="{{ product.image or 'https://via.placeholder.com/300x300/eee/999?text=Image' }}" alt="{{ product.name }}" loading="lazy">
+                {% if product.video %}
+                <div class="video-icon" onclick="openVideoModal('{{ product.video }}')" title="Watch Video">
+                  <i class="bi bi-play-circle-fill"></i>
+                </div>
+                {% endif %}
+              </div>
+              <div class="card-body">
+                <h6 class="card-title">
+                    <!-- Optional: Add stretched link if product detail page exists -->
+                    <a href="#" class="text-decoration-none text-dark">{{ product.name }}</a>
+                </h6>
+                <p class="price">${{ "%.2f"|format(product.price) if product.price is defined else '0.00' }}</p>
+                 <!-- CHANGE: Updated buttons wrapper -->
+                <div class="product-buttons mt-auto">
+                   <!-- CHANGE: Add to Cart Icon Button -->
+                   <button type="button" class="btn btn-add" onclick="addToCart({{product.id}})" title="Add to Cart" aria-label="Add to Cart">
+                       <i class="bi bi-cart-plus-fill"></i>
+                   </button>
+                   <!-- CHANGE: Wishlist Icon Button (within its own form) -->
+                   <form action="{{ url_for('add_to_wishlist') if url_for else '#' }}" method="post" class="d-inline-block"> <!-- Form for wishlist -->
+                      <input type="hidden" name="product_id" value="{{ product.id }}">
+                      <button type="submit" class="btn btn-wishlist" title="Add to Wishlist" aria-label="Add to Wishlist">
+                          <i class="bi bi-heart-fill"></i>
+                      </button>
+                   </form>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+         {% else %}
+            <!-- No products found message -->
+             <div class="col-12 text-center py-5 bg-light rounded my-4 border">
+                 <i class="bi bi-emoji-frown display-5 text-muted mb-3"></i>
+                 <h5 class="mb-2">No products found</h5>
+                 <p class="text-muted small">Try adjusting the filters or searching for something else.</p>
+                 <a href="{{ url_for('customer_products') if url_for else '#' }}" class="btn btn-sm btn-outline-primary mt-2"><i class="bi bi-arrow-clockwise me-1"></i> Clear Filters</a>
+             </div>
+         {% endif %}
+        </div>
+
+        <!-- Pagination -->
+        {% if total_pages and total_pages > 1 %}
+          <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+            <ul class="pagination">
+              <li class="page-item {% if current_page <= 1 %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('customer_products', page=current_page - 1, search=current_search, sort=current_sort, price_max=current_price, **{'category': current_cats}) if url_for else '#' }}" aria-label="Previous"><span aria-hidden="true">«</span></a>
+              </li>
+              {% set start_page = [1, current_page - 2] | max %}
+              {% set end_page = [total_pages, current_page + 2] | min %}
+              {% if start_page > 1 %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('customer_products', page=1, search=current_search, sort=current_sort, price_max=current_price, **{'category': current_cats}) if url_for else '#' }}">1</a></li>
+                {% if start_page > 2 %} <li class="page-item disabled"><span class="page-link">...</span></li> {% endif %}
+              {% endif %}
+              {% for page_num in range(start_page, end_page + 1) %}
+                <li class="page-item {% if page_num == current_page %}active{% endif %}" {% if page_num == current_page %}aria-current="page"{% endif %}>
+                  <a class="page-link" href="{{ url_for('customer_products', page=page_num, search=current_search, sort=current_sort, price_max=current_price, **{'category': current_cats}) if url_for else '#' }}">{{ page_num }}</a>
+                </li>
+              {% endfor %}
+               {% if end_page < total_pages %}
+                 {% if end_page < total_pages - 1 %} <li class="page-item disabled"><span class="page-link">...</span></li> {% endif %}
+                 <li class="page-item"><a class="page-link" href="{{ url_for('customer_products', page=total_pages, search=current_search, sort=current_sort, price_max=current_price, **{'category': current_cats}) if url_for else '#' }}">{{ total_pages }}</a></li>
+               {% endif %}
+              <li class="page-item {% if current_page >= total_pages %}disabled{% endif %}">
+                <a class="page-link" href="{{ url_for('customer_products', page=current_page + 1, search=current_search, sort=current_sort, price_max=current_price, **{'category': current_cats}) if url_for else '#' }}" aria-label="Next"><span aria-hidden="true">»</span></a>
+              </li>
+            </ul>
+          </nav>
+        {% endif %}
+
+      </div> <!-- End col-lg-9 -->
+    </div> <!-- End row -->
+  </div> <!-- End container -->
+
+  <!-- Video Modal -->
+  <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+       <div class="modal-content bg-dark text-white">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="videoModalLabel">Product Video</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="stopVideo()"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div class="ratio ratio-16x9">
+            <iframe id="videoFrame" src="" title="Product video" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Chatbot Button -->
+  <div id="chatbot-button" onclick="toggleChatbot()" title="Chat with us" role="button" aria-expanded="false" aria-controls="chatbot-popup">
+     <i class="bi bi-chat-right-dots-fill"></i>
+  </div>
+
+  <!-- Chatbot Popup -->
+  <div id="chatbot-popup" role="dialog" aria-labelledby="chatHeader" aria-modal="true">
+    <div class="chat-header" id="chatHeader">
+      <span>Chat with Support</span>
+      <button type="button" class="btn-close-chat" aria-label="Close chat" onclick="toggleChatbot()"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="chat-body" id="chat-body">
+      <!-- Initial bot message added via JS -->
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" class="form-control" placeholder="Ask a question..." aria-label="Chat message input">
+      <button id="send-chat" class="btn btn-primary" type="button" aria-label="Send message"><i class="bi bi-send-fill"></i></button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Add to Cart Handler (Original functionality - Page Reload)
+    function addToCart(id) {
+      console.log(`Adding product ${id} to cart...`);
+      fetch(`/add_to_cart/${id}`, { method: 'POST' })
+        .then(response => {
+            if (!response.ok) {
+                 console.error("Server responded with an error:", response.status);
+                 alert(`Error ${response.status}: Could not add item to cart.`);
+                 throw new Error(`Server error: ${response.status}`);
+            }
+            return response.json(); // Expect JSON response
+        })
+        .then(data => {
+            console.log("Add to cart response:", data);
+            location.reload(); // Reload page on success
+        })
+        .catch(err => {
+            console.error("Error adding to cart:", err);
+            // Avoid reload if error was caught
+             if (!err.message?.startsWith('Server error')) {
+               alert("Could not add item to cart due to a network or script error.");
+            }
+        });
+    }
+
+    // --- Wishlist uses standard form submission - No JS needed here ---
+    // --- Ensure backend route for add_to_wishlist handles POST and redirects ---
+
+    // Video Modal Functions
+    let videoModalInstance = null;
+    const videoModalElement = document.getElementById('videoModal');
+    if (videoModalElement) {
+        videoModalInstance = new bootstrap.Modal(videoModalElement);
+        videoModalElement.addEventListener('hidden.bs.modal', stopVideo);
+    }
+
+    function openVideoModal(videoUrl) {
+      const videoFrame = document.getElementById('videoFrame');
+      if (videoFrame && videoUrl && videoModalInstance) {
+         let embedUrl = videoUrl;
+         try { // Basic URL parsing/embedding
+             if (videoUrl.includes('youtube.com/watch?v=') || videoUrl.includes('youtu.be/')) {
+                 const videoId = new URL(videoUrl).searchParams.get('v') || videoUrl.split('/').pop();
+                 if (videoId) embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+             } else if (videoUrl.includes('vimeo.com/')) {
+                 const videoId = videoUrl.split('/').pop().split('?')[0];
+                 if (videoId) embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`;
+             }
+             videoFrame.src = embedUrl;
+             videoModalInstance.show();
+         } catch (e) { console.error("Error parsing video URL:", e); alert("Could not load video."); }
+      } else { console.error("Video frame/URL invalid or modal not initialized."); alert("Could not load video."); }
+    }
+
+    function stopVideo() {
+      const videoFrame = document.getElementById('videoFrame');
+      if (videoFrame) videoFrame.src = ""; // Clear src to stop video
+    }
+
+    // Chatbot open/close/send logic (Unchanged Functionality)
+    const chatbotPopup = document.getElementById('chatbot-popup');
+    const chatBody = document.getElementById('chat-body');
+    const chatInput = document.getElementById('chat-input');
+    const sendChatBtn = document.getElementById('send-chat');
+    const chatbotButton = document.getElementById('chatbot-button');
+    let isChatbotOpen = false;
+
+    function toggleChatbot() {
+        if (!chatbotPopup || !chatbotButton) return;
+        isChatbotOpen = !isChatbotOpen;
+        if (isChatbotOpen) {
+            chatbotPopup.classList.add('show');
+            chatbotButton.setAttribute('aria-expanded', 'true');
+            setTimeout(() => chatInput?.focus(), 310);
+        } else {
+            chatbotPopup.classList.remove('show');
+            chatbotButton.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    function appendMessage(text, sender) {
+      if (!chatBody) return;
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('chat-bubble', sender);
+      const sanitizedText = text.replace(/</g, "<").replace(/>/g, ">");
+      msgDiv.innerHTML = sanitizedText;
+      chatBody.appendChild(msgDiv);
+      chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+    }
+
+    function showTypingIndicator() {
+      if (!chatBody || document.getElementById('typing')) return;
+      const typingDiv = document.createElement('div');
+      typingDiv.id = 'typing';
+      typingDiv.classList.add('chat-bubble', 'bot');
+      typingDiv.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      chatBody.appendChild(typingDiv);
+      chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+    }
+
+    function removeTypingIndicator() {
+      const typingIndicator = document.getElementById('typing');
+      if (typingIndicator) typingIndicator.remove();
+    }
+
+    async function sendMessage() {
+      if (!chatInput || !chatBody || !sendChatBtn) return;
+      const message = chatInput.value.trim();
+      if (!message) return;
+      const currentMessage = message;
+      appendMessage(currentMessage, 'user');
+      chatInput.value = ""; chatInput.disabled = true; sendChatBtn.disabled = true;
+      showTypingIndicator();
+      try {
+        const response = await fetch('/chat', { /* Ensure /chat endpoint exists */
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ message: currentMessage })
+        });
+        removeTypingIndicator();
+        if (!response.ok) {
+          let errorMsg = `Server error: ${response.status}`;
+          try { const errorData = await response.json(); errorMsg = errorData.error || errorData.message || errorMsg; } catch (e) { /* Ignore */ }
+          throw new Error(errorMsg);
+        }
+        const data = await response.json();
+        appendMessage(data.reply || "Sorry, I received an empty response.", 'bot');
+        // speakText(data.reply); // Optional speech
+      } catch (error) {
+        console.error("Chatbot error:", error); removeTypingIndicator();
+        appendMessage(`Sorry, an error occurred: ${error.message}. Please try again.`, 'bot');
+      } finally {
+        if (chatbotPopup?.classList.contains('show')) {
+          chatInput.disabled = false; sendChatBtn.disabled = false; chatInput.focus();
+        } else { chatInput.disabled = false; sendChatBtn.disabled = false; }
+      }
+    }
+
+    if (sendChatBtn && chatInput) {
+      sendChatBtn.addEventListener('click', sendMessage);
+      chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
+    }
+
+    function speakText(text) { /* Optional Text-to-Speech */
+      if ('speechSynthesis' in window && text) { /* ... implementation ... */ }
+    }
+
+    // Initialize chatbot & handle outside clicks
+    document.addEventListener('DOMContentLoaded', () => {
+      if (chatBody && chatBody.children.length === 0) appendMessage("Hello! How can I assist you today?", 'bot');
+      document.addEventListener('click', (event) => { /* Close chatbot on outside click */
+        if (!chatbotPopup || !chatbotButton) return;
+        const isClickInsidePopup = chatbotPopup.contains(event.target);
+        const isClickOnButton = chatbotButton.contains(event.target);
+        if (!isClickInsidePopup && !isClickOnButton && isChatbotOpen) toggleChatbot();
+      });
+    });
+
+  </script>
+
+</body>
+</html>

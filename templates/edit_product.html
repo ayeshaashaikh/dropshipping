@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Product - Dropshipping Website</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
+    .navbar { margin-bottom: 20px; }
+    .navbar-brand { font-weight: bold; }
+    .container { margin-top: 30px; }
+    h2 { margin-bottom: 20px; }
+    .form-group label { font-weight: 600; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Dropship</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('list_products') }}">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <h2>Edit Product</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="name">Product Name</label>
+        <input type="text" class="form-control" name="name" value="{{ product.name }}" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea class="form-control" name="description">{{ product.description }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="image_file">Upload New Image (leave empty to keep current)</label>
+        <input type="file" class="form-control-file" name="image_file" accept="image/*">
+      </div>
+      <div class="form-group">
+        <label for="video_file">Upload New Video (leave empty to keep current)</label>
+        <input type="file" class="form-control-file" name="video_file" accept="video/*">
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" step="0.01" class="form-control" name="price" value="{{ product.price }}" required>
+      </div>
+      <div>
+        <label for="category" class="block text-sm font-medium text-medium-text mb-2">Category</label>
+        <select id="category" name="category" required
+                class="w-full bg-secondary-bg border border-border-color text-light-text rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent-purple focus:border-transparent transition appearance-none bg-no-repeat bg-right pr-8"
+                style="background-image: url('data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 20 20\'%3E%3Cpath stroke=\'%23a0a0b0\' stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1.5\' d=\'M6 8l4 4 4-4\'/%3E%3C/svg%3E'); background-position: right 1rem center; background-size: 1.2em 1.2em;">
+            <option value="" disabled class="bg-primary-bg text-medium-text">Select a category</option>
+            {% for category in categories %}
+            <option value="{{ category.id }}" {% if product and product.category_id == category.id %}selected{% endif %} class="bg-primary-bg text-light-text">
+                {{ category.name }}
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Update Product</button>
+    </form>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

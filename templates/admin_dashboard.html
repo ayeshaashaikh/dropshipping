@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.0.7/countUp.umd.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4a90e2',
+            secondary: '#50e3c2',
+            accent: '#f5a623',
+            darkNavy: '#0a1f44',
+            lightBg: '#f9f9f9',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .sidebar-icon {
+      transition: transform 0.3s;
+    }
+    .sidebar-link:hover .sidebar-icon {
+      transform: rotate(180deg);
+    }
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+    }
+    .avatar:hover {
+      box-shadow: 0 0 15px rgba(74, 144, 226, 0.7);
+    }
+
+    /* 3D sidebar */
+    .sidebar-3d {
+      background-color: #0a1f44;
+      border-right: 4px solid #06132e;
+      
+      
+      box-shadow: 10px 0 20px rgba(0, 0, 0, 0.15); /* Clean and soft */
+    }
+
+    /* Soft 3D main area */
+    main {
+      background-color: #f9f9f9;
+    }
+    .sidebar-link {
+        transition: transform 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+        transform-style: preserve-3d;
+      }
+      
+      .sidebar-link:hover {
+        transform: perspective(800px) translateZ(10px);
+        background-color: #2563eb; /* Tailwind's blue-600 */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+      main {
+        animation: fadeIn 0.5s ease;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+  </style>
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Matrix Plugin for Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.min.js"></script>
+
+</head>
+
+<body class="bg-lightBg text-gray-800 font-sans flex min-h-screen gap-4">
+
+  <!-- Sidebar -->
+  <aside class="sidebar-3d w-64 p-6 text-white">
+    <h2 class="text-2xl font-bold mb-6">Admin Panel</h2>
+    <nav>
+      {% set links = [
+        ('admin_dashboard', 'dashboard', 'Dashboard'),
+        ('manage_users', 'people', 'Manage Users'),
+        ('view_orders', 'shopping_cart', 'Sales / Orders'),
+        ('list_products', 'inventory', 'View Products'),
+        ('add_product', 'add_box', 'Add Products'),
+        ('add_category', 'category', 'Add Category'),
+        ('logout', 'logout', 'Logout')
+      ] %}
+      {% for route, icon, label in links %}
+      <a href="{{ url_for(route) }}" class="sidebar-link flex items-center py-2 px-4 rounded hover:bg-blue-900 transition-colors">
+        <span class="sidebar-icon material-icons mr-3">{{ icon }}</span>
+        {{ label }}
+      </a>
+      {% endfor %}
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8 shadow-inner">
+    <header class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold">Dashboard</h1>
+      <div class="flex items-center">
+        <span class="ml-4 text-lg text-gray-600">Welcome, Admin</span>
+      </div>
+    </header>
+
+    <!-- Statistics Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card bg-primary text-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold">Total Orders</h3>
+        <p class="text-3xl font-bold mt-2" id="totalOrders">0</p>
+      </div>
+      <div class="card bg-secondary text-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold">Active Sellers</h3>
+        <p class="text-3xl font-bold mt-2" id="activeSellers">0</p>
+      </div>
+      <div class="card bg-accent text-white p-6 rounded-lg shadow-lg">
+        <h3 class="text-xl font-semibold">Active Customers</h3>
+        <p class="text-3xl font-bold mt-2" id="activeCustomers">0</p>
+      </div>
+    </section>
+
+    <!-- Sales Chart -->
+    <section class="mt-12">
+      <h2 class="text-2xl font-bold mb-4">Monthly Sales & Orders Report</h2>
+      <div class="bg-white p-4 rounded-lg shadow-md">
+        <canvas id="salesChart" height="100"></canvas>
+      </div>
+    </section>
+  
+  </main>
+
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.0/dist/chartjs-chart-matrix.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const options = { duration: 2, separator: ',' };
+      new countUp.CountUp('totalOrders', {{ total_orders | int }}, options).start();
+      new countUp.CountUp('activeSellers', {{ active_sellers | int }}, options).start();
+      new countUp.CountUp('activeCustomers', {{ active_customers | int }}, options).start();
+    });
+
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: {{ months | tojson }},
+        datasets: [
+          {
+            label: 'Total Orders',
+            data: {{ order_counts | tojson }},
+            borderColor: '#f87171',
+            backgroundColor: 'rgba(248, 113, 113, 0.1)',
+            tension: 0.4,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          },
+          {
+            label: 'Sales Amount ($)',
+            data: {{ sales | tojson }},
+            borderColor: '#34d399',
+            backgroundColor: 'rgba(52, 211, 153, 0.1)',
+            tension: 0.4,
+            fill: true,
+            pointRadius: 4,
+            pointHoverRadius: 6
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: '#111827',
+              font: {
+                size: 14
+              }
+            }
+          },
+          tooltip: {
+            backgroundColor: '#111827',
+            titleColor: '#f3f4f6',
+            bodyColor: '#d1d5db',
+            borderColor: '#374151',
+            borderWidth: 1
+          }
+        },
+        scales: {
+          x: {
+            title: {
+              display: true,
+              text: 'Month',
+              color: '#111827'
+            },
+            ticks: {
+              color: '#4b5563'
+            },
+            grid: {
+              color: '#e5e7eb'
+            }
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Orders / Sales',
+              color: '#111827'
+            },
+            ticks: {
+              color: '#4b5563'
+            },
+            grid: {
+              color: '#e5e7eb'
+            }
+          }
+        }
+      }
+    });
+
+    const heatmapCtx = document.getElementById('heatmapChart').getContext('2d');
+
+  const heatmapChart = new Chart(heatmapCtx, {
+    type: 'matrix',
+    data: {
+      datasets: [{
+        label: 'User Activity',
+        data: {{ heatmap_data | tojson }},
+        backgroundColor(ctx) {
+          const value = ctx.dataset.data[ctx.dataIndex].v;
+          const alpha = Math.min(1, value / 10);
+          return `rgba(74, 144, 226, ${alpha})`; // primary blue with intensity
+        },
+        width: ({chart}) => chart.chartArea.width / 7 - 5,
+        height: ({chart}) => chart.chartArea.height / 24 - 2,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            title: () => '',
+            label: ctx => {
+              const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+              return `${dayNames[ctx.raw.x - 1]} @ ${ctx.raw.y}:00 — ${ctx.raw.v} users`;
+            }
+          }
+        },
+        legend: { display: false }
+      },
+      scales: {
+        x: {
+          type: 'linear',
+          position: 'top',
+          min: 1,
+          max: 7,
+          ticks: {
+            callback: value => ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][value - 1],
+            color: '#374151',
+            font: { weight: 'bold' }
+          },
+          title: {
+            display: true,
+            text: 'Day of Week',
+            color: '#111827'
+          },
+          grid: { display: false }
+        },
+        y: {
+          type: 'linear',
+          min: 0,
+          max: 23,
+          ticks: {
+            stepSize: 1,
+            callback: value => `${value}:00`,
+            color: '#374151'
+          },
+          title: {
+            display: true,
+            text: 'Hour of Day',
+            color: '#111827'
+          },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+  </script>
+</body>
+</html>

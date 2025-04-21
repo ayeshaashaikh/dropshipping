@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login - Dropshipping Website</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #00d1ff;
+      --accent-color: #ff00e1;
+      --dark-overlay: rgba(10, 10, 35, 0.85); /* Slightly darker overlay */
+      --form-bg: #1a1a2e; /* Dark blue/purple background for form side */
+      --light-text: #f0f0f0;
+      --input-bg: rgba(255, 255, 255, 0.05);
+      --input-border: rgba(255, 255, 255, 0.2);
+      --input-focus-border: var(--primary-color);
+      --input-focus-shadow: rgba(0, 209, 255, 0.3);
+    }
+
+    /* Global Styles */
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: var(--light-text);
+      overflow-x: hidden; /* Prevent horizontal scroll */
+    }
+
+    .login-split-container {
+      min-height: 100vh;
+      display: flex;
+      flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    }
+
+    /* --- Image/Branding Section --- */
+    .image-section {
+      flex: 1 1 50%; /* Take up 50% width, allow shrinking/growing */
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url("{{ url_for('static', filename='images/hero4.jpg') }}") no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem;
+      text-align: center;
+      min-height: 40vh; /* Ensure some height on small screens */
+      position: relative; /* For potential absolute positioned elements */
+      color: #fff;
+    }
+
+    .image-section h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .image-section p {
+        font-size: 1.1rem;
+        max-width: 400px;
+        line-height: 1.6;
+        text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+    }
+
+    /* --- Form Section --- */
+    .form-section {
+      flex: 1 1 50%; /* Take up 50% width */
+      background-color: var(--form-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 2rem; /* More padding */
+      min-height: 60vh; /* Ensure form has enough space */
+    }
+
+    .login-card-wrapper {
+        max-width: 420px;
+        width: 100%;
+    }
+
+    .login-card {
+      background: transparent; /* Make card transparent, rely on section bg */
+      padding: 0; /* Remove card padding, use wrapper padding */
+      text-align: center;
+      color: var(--light-text);
+      width: 100%;
+    }
+
+    .login-card h2 {
+      margin-bottom: 2rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: var(--light-text);
+      margin-bottom: 0.5rem;
+      display: block; /* Ensure it takes full width */
+      text-align: left;
+    }
+
+    .form-control {
+      border-radius: 8px; /* Slightly more rounded */
+      border: 1px solid var(--input-border);
+      background-color: var(--input-bg);
+      color: #fff;
+      padding: 0.85rem 1rem; /* Adjust padding */
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .form-control::placeholder { /* Style placeholder text */
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .form-control:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--input-focus-shadow);
+      border-color: var(--input-focus-border);
+      background-color: rgba(255, 255, 255, 0.08); /* Slightly lighten on focus */
+    }
+
+    .btn-primary {
+      width: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      border: none;
+      padding: 0.85rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.3s ease; /* Smoother transition for multiple props */
+      margin-top: 1.5rem;
+      color: #fff; /* Ensure text is white */
+      background-size: 200% auto; /* For hover effect */
+    }
+
+    .btn-primary:hover {
+      background-position: right center; /* Change gradient direction on hover */
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transform: translateY(-3px);
+    }
+
+    /* Links */
+    .action-links {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .action-links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 5px; /* Spacing for multiple links */
+    }
+
+    .action-links a:hover {
+      text-decoration: underline;
+      color: var(--accent-color);
+    }
+
+    .back-link a {
+        display: inline-flex; /* Align icon and text */
+        align-items: center;
+        gap: 0.4rem; /* Space between icon and text */
+        color: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px; /* Pill shape */
+        transition: all 0.3s ease;
+    }
+    .back-link a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        text-decoration: none;
+    }
+
+    /* Responsive adjustments (Bootstrap handles stacking via flex-wrap) */
+    @media (max-width: 767.98px) {
+        .image-section, .form-section {
+            flex: 1 1 100%; /* Full width on small screens */
+        }
+        .form-section {
+             padding: 2rem 1rem; /* Less horizontal padding on mobile */
+        }
+        .image-section {
+             min-height: 30vh; /* Adjust height */
+             padding: 2rem 1rem;
+        }
+        .image-section h1 {
+            font-size: 2rem;
+        }
+        .image-section p {
+            font-size: 1rem;
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-split-container">
+
+    <!-- Image/Branding Section -->
+    <div class="image-section">
+      <!-- You can add a logo here -->
+      <!-- <img src="path/to/your/logo.png" alt="Logo" style="max-width: 150px; margin-bottom: 1rem;"> -->
+      <h1>Welcome Back!</h1>
+      <p>Log in to Buy products, access your dropshipping dashboard and manage your store.</p>
+      <!-- Add more branding elements if desired -->
+    </div>
+
+    <!-- Form Section -->
+    <div class="form-section">
+      <div class="login-card-wrapper">
+        <div class="login-card">
+          <h2>Login</h2>
+          <form method="POST">
+            <div class="mb-4"> <!-- Increased margin bottom -->
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+              >
+            </div>
+            <div class="mb-4"> <!-- Increased margin bottom -->
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              >
+            </div>
+            <!-- Add Forgot Password link if needed -->
+            <!-- <div class="text-end mb-3">
+                 <a href="/forgot-password" class="small" style="color: var(--primary-color); text-decoration: none;">Forgot Password?</a>
+            </div> -->
+            <button type="submit" class="btn btn-primary">Login Securely</button>
+          </form>
+
+          <div class="action-links">
+            <span>Don't have an account?</span>
+            <a href="{{ url_for('register') }}">Register Now</a>
+          </div>
+
+           <div class="mt-4 back-link"> <!-- Adjusted margin top -->
+                <a href="{{ url_for('home') }}">
+                  <i class="bi bi-arrow-left-circle"></i> Back to Home
+                </a>
+           </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- End Login Split Container -->
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

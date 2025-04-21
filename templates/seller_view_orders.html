@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Management - Synapse</title> <!-- Updated Title -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+    <style>
+      /* Custom scrollbar (from dashboard) */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb { background: rgba(192, 132, 252, 0.6); border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: rgba(192, 132, 252, 0.8); }
+
+      /* Style select dropdown arrow for dark mode */
+      select {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a0a0b0' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.5rem center; /* Adjusted position */
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none;
+      }
+    </style>
+    <script>
+      // Tailwind Customizations (from dashboard)
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'primary-bg': '#0a0a1e',
+              'secondary-bg': '#1a1a3a',
+              'glass-bg': 'rgba(26, 26, 58, 0.6)',
+              'border-color': 'rgba(192, 132, 252, 0.2)',
+              'accent-purple': '#a855f7',
+              'accent-cyan': '#22d3ee',
+              'light-text': '#e0e0e0',
+              'medium-text': '#a0a0b0',
+              'dark-text': '#1f2937',
+              // Added status colors (using Tailwind defaults indirectly)
+              'yellow-light': 'rgba(234, 179, 8, 0.1)',  'yellow-dark': '#fde047', // ~yellow-300
+              'blue-light':   'rgba(59, 130, 246, 0.1)', 'blue-dark':   '#93c5fd', // ~blue-300
+              'purple-light': 'rgba(168, 85, 247, 0.1)', 'purple-dark': '#c084fc', // ~purple-400 (adjust if needed)
+              'green-light':  'rgba(16, 185, 129, 0.1)','green-dark':  '#6ee7b7', // ~green-300
+              'gray-light':   'rgba(156, 163, 175, 0.1)','gray-dark':   '#d1d5db', // ~gray-300
+            }
+          }
+        }
+      }
+    </script>
+    <!-- Removed Material Icons link -->
+    <!-- Removed link to styles.css -->
+</head>
+<body class="bg-gradient-to-br from-primary-bg via-black to-primary-bg text-light-text min-h-screen flex antialiased">
+
+  <!-- Sidebar (Copied from seller_dashboard.html) -->
+  <aside class="w-72 bg-secondary-bg/80 backdrop-blur-lg border-r border-border-color p-6 flex flex-col shadow-2xl fixed top-0 left-0 h-full z-10">
+    <!-- Logo/Title Area -->
+    <div class="flex items-center gap-3 mb-10">
+       <span class="text-3xl">⚡</span>
+       <h2 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent-purple to-accent-cyan">
+         Seller Panel
+       </h2>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-grow">
+      <ul class="space-y-3">
+        <!-- Dashboard -->
+        <li>
+          <a href="{{ url_for('seller_dashboard') }}"
+             class="group flex items-center p-3 rounded-lg text-medium-text transition-all duration-200 ease-out hover:bg-white/5 hover:text-white hover:pl-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-gray-400 transition-colors duration-200 group-hover:text-accent-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Dashboard
+          </a>
+        </li>
+        <!-- View Products -->
+        <li>
+          <a href="{{ url_for('seller_list_products') }}"
+             class="group flex items-center p-3 rounded-lg text-medium-text transition-all duration-200 ease-out hover:bg-white/5 hover:text-white hover:pl-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-gray-400 transition-colors duration-200 group-hover:text-accent-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            View Products
+          </a>
+        </li>
+        <!-- Active View Orders -->
+        <li>
+          <a href="{{ url_for('seller_view_orders') }}"
+             class="group flex items-center p-3 rounded-lg bg-gradient-to-r from-accent-purple/20 to-transparent border-l-4 border-accent-purple text-white font-semibold shadow-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-accent-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002-2h2a2 2 0 002 2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+            </svg>
+            View Orders
+          </a>
+        </li>
+        <!-- Add Product -->
+        <li>
+          <a href="{{ url_for('seller_add_product') }}"
+             class="group flex items-center p-3 rounded-lg text-medium-text transition-all duration-200 ease-out hover:bg-white/5 hover:text-white hover:pl-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-gray-400 transition-colors duration-200 group-hover:text-accent-cyan" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Add Product
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Logout Button -->
+    <div class="mt-auto pt-4 border-t border-border-color">
+        <a href="{{ url_for('logout') }}"
+           class="group flex items-center p-3 rounded-lg text-red-400 transition-all duration-200 ease-out hover:bg-red-500/10 hover:text-red-300 hover:pl-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-4 text-red-500 transition-colors duration-200 group-hover:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          Logout
+        </a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 ml-72 p-12 overflow-y-auto">
+      <h1 class="text-4xl font-semibold mb-10 text-transparent bg-clip-text bg-gradient-to-r from-accent-purple to-accent-cyan">
+        Order Management
+      </h1>
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="mb-8 space-y-4">
+            {% for category, message in messages %}
+              {% set color = 'blue' %}
+              {% if category == 'success' %}{% set color = 'green' %}
+              {% elif category == 'error' or category == 'danger' %}{% set color = 'red' %}
+              {% elif category == 'warning' %}{% set color = 'yellow' %}
+              {% endif %}
+              <div class="bg-{{ color }}-500/10 border border-{{ color }}-500/30 text-{{ color }}-300 px-4 py-3 rounded-lg relative shadow-md" role="alert">
+                <span class="block sm:inline">{{ message }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+
+      <!-- Orders Table Container -->
+      <div class="bg-glass-bg backdrop-blur-md border border-border-color rounded-xl shadow-xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-border-color">
+            <thead class="bg-secondary-bg/50">
+              <tr>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Order ID</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Product</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Customer</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Qty</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Price</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Total</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Status</th>
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Placed On</th>
+                {% if session['role'] in ['Admin', 'Seller'] %}
+                <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-medium-text uppercase tracking-wider">Action</th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-border-color">
+              {% if orders %}
+                {% for order in orders %}
+                <tr class="hover:bg-white/5 transition-colors duration-150">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-medium-text">{{ order.order_id }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-light-text">{{ order.product_name }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-light-text">{{ order.customer_name }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-light-text">{{ order.quantity }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-light-text">${{ '%.2f'|format(order.price) }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-light-text">${{ '%.2f'|format(order.price * order.quantity) }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    {# Status Badge #}
+                    {% set status_color = 'gray' %} {# Default #}
+                    {% if order.status == 'Pending' %}{% set status_color = 'yellow' %}
+                    {% elif order.status == 'Processing' %}{% set status_color = 'blue' %}
+                    {% elif order.status == 'Shipped' %}{% set status_color = 'purple' %}
+                    {% elif order.status == 'Delivered' %}{% set status_color = 'green' %}
+                    {% endif %}
+                    <span class="px-2.5 py-1 inline-flex text-xs leading-4 font-semibold rounded-full bg-{{ status_color }}-light text-{{ status_color }}-dark">
+                      {{ order.status }}
+                    </span>
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-medium-text">{{ order.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                  {% if session['role'] in ['Admin', 'Seller'] %}
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <form action="{{ url_for('seller_update_order_status', order_id=order.order_id) }}" method="post" class="flex items-center space-x-2">
+                      <select name="new_status" class="bg-primary-bg border border-border-color text-light-text rounded-md px-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-accent-purple focus:border-transparent transition appearance-none w-32">
+                        <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                        <option value="Processing" {% if order.status == 'Processing' %}selected{% endif %}>Processing</option>
+                        <option value="Shipped" {% if order.status == 'Shipped' %}selected{% endif %}>Shipped</option>
+                        <option value="Delivered" {% if order.status == 'Delivered' %}selected{% endif %}>Delivered</option>
+                        <!-- Add other statuses if needed -->
+                      </select>
+                      <button type="submit" class="inline-flex items-center px-3 py-1.5 bg-accent-cyan/80 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-accent-cyan focus:outline-none focus:ring-1 focus:ring-accent-cyan focus:ring-offset-1 focus:ring-offset-secondary-bg transition ease-in-out duration-150 shadow">
+                        Update
+                      </button>
+                    </form>
+                  </td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td colspan="{{ 9 if session['role'] in ['Admin', 'Seller'] else 8 }}" class="text-center py-12 text-medium-text italic">
+                      No orders found.
+                  </td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </main>
+
+</body>
+</html>
